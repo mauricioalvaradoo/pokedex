@@ -1,16 +1,17 @@
+import pandas as pd
 from selenium import webdriver
 from bs4 import BeautifulSoup
-from lxml import etree
+from selenium.webdriver.common.by import By
 # import pandas
 # from selenium.webdriver.support.ui import Select
-# from selenium.webdriver.common.by import By
+
 # from time import sleep
 # import re
 
 
 
 def get_urls(url):
-    """ Obtención de URL de Pokemons
+    """ Obtención de URLs de Pokemons
     
     Parámetros
     ----------
@@ -64,8 +65,8 @@ def get_information(list_urls):
     list_generation [list]: Generación
     list_type [list]: Tipo
     list_image_url [list]: Url de imagen
-    list_kind [list]
-    list_abilities [dict]: Habilidades    
+    list_kind [list]: Egg group
+    list_stats [dict]: Stats  
     
     """
     
@@ -75,7 +76,8 @@ def get_information(list_urls):
     list_type = []
     list_image_url = [] 
     list_kind = []
-    list_abilities = [] 
+    list_stats = []
+    
     
     for url in list_urls:
         
@@ -84,38 +86,89 @@ def get_information(list_urls):
         driver.get(url)
         html = driver.page_source   
         soup = BeautifulSoup(html, 'html.parser')
-        dom = etree.HTML(str(soup)) # Para trabajo con xpath
-        driver.close()
         
-        # Recoger los valores
-        pid = dom.xpath('//*[@id="mw-content-text"]/div[1]/aside/section[4]/section[1]/section[2]/div[1]')[0].text
-        name = dom.xpath('//*[@id="mw-content-text"]/div[1]/aside/section[1]/h2[1]')[0].text
-        generation = dom.xpath('//*[@id="mw-content-text"]/div[1]/aside/section[2]/section[1]/section[2]/div/a')[0].text
-        image_url = soup.xpath('//*[@id="mw-content-text"]/div[1]/aside/figure/a//@href')
+        # IDs
+        try:
+            pid = driver.find_element(By.XPATH, value='//*[@id="mw-content-text"]/div[1]/aside/section[4]/section[1]/section[2]/div[1]').text
+        except:
+            try:
+                pid = driver.find_element(By.XPATH, value='//*[@id="mw-content-text"]/div[1]/aside/section/div[2]/section[4]/section[1]/section[2]/div[1]').text
+            except:
+                pid = driver.find_element(By.XPATH, value='//*[@id="mw-content-text"]/div[1]/aside/section/div/section[3]/section/section[2]/div[2]').text
+                
+        # Nombres
+        try: 
+            name = driver.find_element(By.XPATH, value='//*[@id="mw-content-text"]/div[1]/aside/section[1]/h2[1]').text
+        except:
+            try:
+                name = driver.find_element(By.XPATH, value='//*[@id="mw-content-text"]/div[1]/aside/section/div[2]/section[1]/h2[1]').text
+            except:
+                name = driver.find_element(By.XPATH, value='//*[@id="mw-content-text"]/div[1]/aside/section/div/section[1]/h2[1]').text
+                
+        # Generación
+        try:
+            generation = driver.find_element(By.XPATH, value='//*[@id="mw-content-text"]/div[1]/aside/section[2]/section[1]/section[2]/div/a').text
+        except:
+            try:
+                generation = driver.find_element(By.XPATH, value='//*[@id="mw-content-text"]/div[1]/aside/section/div[2]/section[2]/section[1]/section[2]/div').text
+            except:
+                generation = driver.find_element(By.XPATH, value='//*[@id="mw-content-text"]/div[1]/aside/section/div/section[2]/section[1]/section[2]/div').text
+        # Tipos
+        try:
+            all_types = driver.find_element(By.XPATH, value='//*[@id="mw-content-text"]/div[1]/aside/section[2]/div[1]/div')
+        except:
+            try:
+                all_types = driver.find_element(By.XPATH, value='//*[@id="mw-content-text"]/div[1]/aside/section/div[2]/section[2]/div[1]/div')
+            except:
+                all_types = driver.find_element(By.XPATH, value='//*[@id="mw-content-text"]/div[1]/aside/section/div/section[2]/div[1]/div')
+        types = []
+        all_types = all_types.find_elements(By.CSS_SELECTOR, value='a')
+        for i in all_types:
+            types.append( i.get_attribute('title') )
         
-        # types = []
-        # ptype = soup.find_all('div', {'xpath': 'pi-data-value pi-font'})
-        # for i in ptype:
-        #     types.append( i.find('a').text )    
+        # URL de imágenes
+        try:
+            image_url = driver.find_element(By.XPATH, value = '//*[@id="mw-content-text"]/div[1]/aside/figure/a').get_attribute('href')
+        except:
+            try:
+                image_url = driver.find_element(By.XPATH, value = '//*[@id="mw-content-text"]/div[1]/aside/section/div[2]/figure/a').get_attribute('href')
+            except:
+                image_url = driver.find_element(By.XPATH, value = '//*[@id="mw-content-text"]/div[1]/aside/section/div/figure/a').get_attribute('href')
+        ## Egg group
+        try:
+            all_kinds = driver.find_element(By.XPATH, value = '//*[@id="mw-content-text"]/div[1]/aside/section[6]/section[3]/section[2]/div[1]')
+        except:
+            try:
+                all_kinds = driver.find_element(By.XPATH, value = '//*[@id="mw-content-text"]/div[1]/aside/section/div[2]/section[6]/section[3]/section[2]/div[1]')
+            except:
+                all_kinds = driver.find_element(By.XPATH, value = '//*[@id="mw-content-text"]/div[1]/aside/section/div/section[6]/section[3]/section[2]/div[1]')
+        kinds = []
+        all_kinds = all_kinds.find_elements(By.CSS_SELECTOR, value='a')
+        for i in all_kinds:
+            kinds.append( i.get_attribute('title').replace(' (egg group)', '' ) )
         
-        # kinds = []
-        # kind = soup.find_all('div', {'xpath': '//*[@id="mw-content-text"]/div[1]/aside/section[6]/section[3]/section[2]/div[1]'})
-        # for i in kind:
-        #     kinds.append( i.find('a').text )
-        
-        # abilities =                                                       
+        # Stats
+        stats = soup.find('table', {'class': 'roundy'})
+        stats = pd.read_html(str(stats))[0]
+        stats = stats.set_index(stats.columns[0])
+        stats = list(stats.to_dict().values())[0]
 
+        
         # Guardado
         list_id.append(pid)
         list_name.append(name)
         list_generation.append(generation)
-        # list_type.append(types)
+        list_type.append(types)
         list_image_url.append(image_url)
-        # list_kind.append(kinds)
-        # list_abilities.append()
+        list_kind.append(kinds)
+        list_stats.append(stats)
+        
+        driver.close()
 
-
-    return list_id, list_name, list_generation, list_type, list_image_url, list_kind #, list_abilities
+    return (
+        list_id, list_name, list_generation, list_type, list_image_url,
+        list_kind, list_stats
+        )
 
 
 

@@ -94,8 +94,11 @@ def get_information(list_urls):
             try:
                 pid = driver.find_element(By.XPATH, value='//*[@id="mw-content-text"]/div[1]/aside/section/div[2]/section[4]/section[1]/section[2]/div[1]').text
             except:
-                pid = driver.find_element(By.XPATH, value='//*[@id="mw-content-text"]/div[1]/aside/section/div/section[3]/section/section[2]/div[2]').text
-                
+                try:
+                    pid = driver.find_element(By.XPATH, value='//*[@id="mw-content-text"]/div[1]/aside/section/div/section[3]/section/section[2]/div[2]').text
+                except:
+                    pid = driver.find_element(By.XPATH, value='//*[@id="mw-content-text"]/div[1]/aside/section[3]/section/section[2]/div[2]').text
+        
         # Nombres
         try: 
             name = driver.find_element(By.XPATH, value='//*[@id="mw-content-text"]/div[1]/aside/section[1]/h2[1]').text
@@ -103,8 +106,11 @@ def get_information(list_urls):
             try:
                 name = driver.find_element(By.XPATH, value='//*[@id="mw-content-text"]/div[1]/aside/section/div[2]/section[1]/h2[1]').text
             except:
-                name = driver.find_element(By.XPATH, value='//*[@id="mw-content-text"]/div[1]/aside/section/div/section[1]/h2[1]').text
-                
+                try:
+                    name = driver.find_element(By.XPATH, value='//*[@id="mw-content-text"]/div[1]/aside/section/div/section[1]/h2[1]').text
+                except:
+                    name = driver.find_element(By.XPATH, value='//*[@id="mw-content-text"]/div[1]/aside/section[1]/h2[1]').text
+       
         # Generación
         try:
             generation = driver.find_element(By.XPATH, value='//*[@id="mw-content-text"]/div[1]/aside/section[2]/section[1]/section[2]/div/a').text
@@ -112,7 +118,11 @@ def get_information(list_urls):
             try:
                 generation = driver.find_element(By.XPATH, value='//*[@id="mw-content-text"]/div[1]/aside/section/div[2]/section[2]/section[1]/section[2]/div').text
             except:
-                generation = driver.find_element(By.XPATH, value='//*[@id="mw-content-text"]/div[1]/aside/section/div/section[2]/section[1]/section[2]/div').text
+                try:
+                    generation = driver.find_element(By.XPATH, value='//*[@id="mw-content-text"]/div[1]/aside/section/div/section[2]/section[1]/section[2]/div').text
+                except:
+                    generation = driver.find_element(By.XPATH, value='//*[@id="mw-content-text"]/div[1]/aside/section[2]/section[1]/section[2]/div').text
+        
         # Tipos
         try:
             all_types = driver.find_element(By.XPATH, value='//*[@id="mw-content-text"]/div[1]/aside/section[2]/div[1]/div')
@@ -120,7 +130,10 @@ def get_information(list_urls):
             try:
                 all_types = driver.find_element(By.XPATH, value='//*[@id="mw-content-text"]/div[1]/aside/section/div[2]/section[2]/div[1]/div')
             except:
-                all_types = driver.find_element(By.XPATH, value='//*[@id="mw-content-text"]/div[1]/aside/section/div/section[2]/div[1]/div')
+                try:
+                    all_types = driver.find_element(By.XPATH, value='//*[@id="mw-content-text"]/div[1]/aside/section/div/section[2]/div[1]/div')
+                except:
+                    all_types = driver.find_element(By.XPATH, value='//*[@id="mw-content-text"]/div[1]/aside/section[2]/div[1]/div')
         types = []
         all_types = all_types.find_elements(By.CSS_SELECTOR, value='a')
         for i in all_types:
@@ -133,7 +146,13 @@ def get_information(list_urls):
             try:
                 image_url = driver.find_element(By.XPATH, value = '//*[@id="mw-content-text"]/div[1]/aside/section/div[2]/figure/a').get_attribute('href')
             except:
-                image_url = driver.find_element(By.XPATH, value = '//*[@id="mw-content-text"]/div[1]/aside/section/div/figure/a').get_attribute('href')
+                try:
+                    image_url = driver.find_element(By.XPATH, value = '//*[@id="mw-content-text"]/div[1]/aside/section/div/figure/a').get_attribute('href')
+                except:
+                    try:
+                        image_url = driver.find_element(By.XPATH, value = '//*[@id="mw-content-text"]/div[1]/aside/figure/a').get_attribute('href')
+                    except:
+                        image_url = ''
         ## Egg group
         try:
             all_kinds = driver.find_element(By.XPATH, value = '//*[@id="mw-content-text"]/div[1]/aside/section[6]/section[3]/section[2]/div[1]')
@@ -141,7 +160,10 @@ def get_information(list_urls):
             try:
                 all_kinds = driver.find_element(By.XPATH, value = '//*[@id="mw-content-text"]/div[1]/aside/section/div[2]/section[6]/section[3]/section[2]/div[1]')
             except:
-                all_kinds = driver.find_element(By.XPATH, value = '//*[@id="mw-content-text"]/div[1]/aside/section/div/section[6]/section[3]/section[2]/div[1]')
+                try:
+                    all_kinds = driver.find_element(By.XPATH, value = '//*[@id="mw-content-text"]/div[1]/aside/section/div/section[6]/section[3]/section[2]/div[1]')
+                except:
+                    all_kinds = driver.find_element(By.XPATH, value = '//*[@id="mw-content-text"]/div[1]/aside/section[6]/section[3]/section[2]/div[1]')
         kinds = []
         all_kinds = all_kinds.find_elements(By.CSS_SELECTOR, value='a')
         for i in all_kinds:

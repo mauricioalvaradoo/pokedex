@@ -29,8 +29,3 @@ with open('Data/list_kind.pkl', 'wb') as f:
 with open('Data/list_stats.pkl', 'wb') as f:
     pickle.dump(list_stats, f)
 
-
-# with open('Data/list_id.pkl', 'rb') as f:
-#     mynewlist = pickle.load(f)
-
-

@@ -60,7 +60,6 @@ def get_information(list_urls):
     
     Retorno
     ----------
-    list_id [list]: Número
     list_name [list]: Nombre
     list_generation [list]: Generación
     list_type [list]: Tipo
@@ -70,7 +69,6 @@ def get_information(list_urls):
     
     """
     
-    list_id = []
     list_name = []
     list_generation = []
     list_type = []
@@ -87,18 +85,7 @@ def get_information(list_urls):
         html = driver.page_source   
         soup = BeautifulSoup(html, 'html.parser')
         
-        # IDs
-        try:
-            pid = driver.find_element(By.XPATH, value='//*[@id="mw-content-text"]/div[1]/aside/section[4]/section[1]/section[2]/div[1]').text
-        except:
-            try:
-                pid = driver.find_element(By.XPATH, value='//*[@id="mw-content-text"]/div[1]/aside/section/div[2]/section[4]/section[1]/section[2]/div[1]').text
-            except:
-                try:
-                    pid = driver.find_element(By.XPATH, value='//*[@id="mw-content-text"]/div[1]/aside/section/div/section[3]/section/section[2]/div[2]').text
-                except:
-                    pid = driver.find_element(By.XPATH, value='//*[@id="mw-content-text"]/div[1]/aside/section[3]/section/section[2]/div[2]').text
-        
+             
         # Nombres
         try: 
             name = driver.find_element(By.XPATH, value='//*[@id="mw-content-text"]/div[1]/aside/section[1]/h2[1]').text
@@ -177,7 +164,6 @@ def get_information(list_urls):
 
         
         # Guardado
-        list_id.append(pid)
         list_name.append(name)
         list_generation.append(generation)
         list_type.append(types)
@@ -188,7 +174,7 @@ def get_information(list_urls):
         driver.close()
 
     return (
-        list_id, list_name, list_generation, list_type, list_image_url,
+        list_name, list_generation, list_type, list_image_url,
         list_kind, list_stats
         )
 

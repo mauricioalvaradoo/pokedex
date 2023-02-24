@@ -3,7 +3,6 @@
 
 
 ```
-<font size=6>
 {
    "Generation I": {
       "1": {
@@ -49,6 +48,7 @@
             "Speed": 60,
             "Total": 247
          }
-      },
-<\font>
+      }
+   }
+}
 ```

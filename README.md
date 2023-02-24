@@ -3,6 +3,7 @@
 
 
 ```
+<font size=6>
 {
    "Generation I": {
       "1": {
@@ -49,4 +50,5 @@
             "Total": 247
          }
       },
+<\font>
 ```

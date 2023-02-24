@@ -6,7 +6,7 @@ with open('Data/pokemons.pkl', 'rb') as f:
     data = pickle.load(f)
 
 
-app = Flask(__name__)
+api = Flask(__name__)
 
 
 # Ruta API
@@ -16,4 +16,4 @@ def get_data():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=4000)
+    api.run(debug=True, port=4000)

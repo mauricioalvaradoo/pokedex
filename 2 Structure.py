@@ -64,3 +64,5 @@ print(json.dumps(pokemons_v2, indent = 3, ensure_ascii=False)[:1203])
 # Exportando la estructura ====================================================
 with open('Data/pokemons.pkl', 'wb') as f:
     pickle.dump(pokemons_v2, f)
+
+

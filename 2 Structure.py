@@ -24,6 +24,18 @@ with open('Data/list_stats.pkl', 'rb') as f:
 
 
 
+# Modificaciones a los URL de las imágenes ====================================
+# Reducción
+list_image_url = [i.split('.png')[0] for i in list_image_url]
+list_image_url = [f'{i}.png' for i in list_image_url]
+
+# Reemplazar el único pokemon sin imagen
+for i in range(len(list_image_url)):
+    if list_image_url[i] == '.png':
+        list_image_url[i] = 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/973.png'
+
+
+
 
 # Estructura ==================================================================
 pokemons_v1 = {}

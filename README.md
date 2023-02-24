@@ -12,7 +12,7 @@
             "Grass type",
             "Poison type"
          ],
-         "Imagen": "https://static.wikia.nocookie.net/pokemon/images/2/21/001Bulbasaur.png/revision/latest?cb=20200620223551",
+         "Imagen": "https://static.wikia.nocookie.net/pokemon/images/2/21/001Bulbasaur.png",
          "Egg Group": [
             "Grass",
             "Monster"
@@ -34,7 +34,7 @@
             "Grass type",
             "Poison type"
          ],
-         "Imagen": "https://static.wikia.nocookie.net/pokemon/images/7/73/002Ivysaur.png/revision/latest?cb=20140328190847",
+         "Imagen": "https://static.wikia.nocookie.net/pokemon/images/7/73/002Ivysaur.png",
          "Egg Group": [
             "Grass",
             "Monster"

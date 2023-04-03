@@ -6,12 +6,12 @@ Disponible [aquí](https://mauricioalvaradoo.github.io/pokemon_api/Data/pokemons
    "Generation I": {
       "1": {
          "Name": "Bulbasaur",
-         "Generación": "Generation I",
-         "Tipo": [
+         "Generation": "Generation I",
+         "Type": [
             "Grass type",
             "Poison type"
          ],
-         "Imagen": "https://static.wikia.nocookie.net/pokemon/images/2/21/001Bulbasaur.png",
+         "Image": "https://static.wikia.nocookie.net/pokemon/images/2/21/001Bulbasaur.png",
          "Egg Group": [
             "Grass",
             "Monster"
@@ -28,12 +28,12 @@ Disponible [aquí](https://mauricioalvaradoo.github.io/pokemon_api/Data/pokemons
       },
       "2": {
          "Name": "Ivysaur",
-         "Generación": "Generation I",
-         "Tipo": [
+         "Generation": "Generation I",
+         "Type": [
             "Grass type",
             "Poison type"
          ],
-         "Imagen": "https://static.wikia.nocookie.net/pokemon/images/7/73/002Ivysaur.png",
+         "Image": "https://static.wikia.nocookie.net/pokemon/images/7/73/002Ivysaur.png",
          "Egg Group": [
             "Grass",
             "Monster"
@@ -48,6 +48,6 @@ Disponible [aquí](https://mauricioalvaradoo.github.io/pokemon_api/Data/pokemons
             "Total": 247
          }
       }
-   }
-}
+    }
+ }
 ```

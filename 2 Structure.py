@@ -44,9 +44,9 @@ for i in range(1, len(list_id)+1):
     
     pokemons_v1[i] = {
         'Name': list_name[i-1],
-        'Generación': list_generation[i-1],
-        'Tipo': list_type[i-1],
-        'Imagen': list_image_url[i-1],
+        'Generation': list_generation[i-1],
+        'Type': list_type[i-1],
+        'Image': list_image_url[i-1],
         'Egg Group': list_kind[i-1],
         'Stats': list_stats[i-1]
     }
@@ -57,7 +57,7 @@ for i in range(1, len(list_id)+1):
 pokemons_v2 = {}
 
 for key, value in pokemons_v1.items():
-    generation = value['Generación']
+    generation = value['Generation']
     
     if generation not in pokemons_v2:
         pokemons_v2[generation] = {}

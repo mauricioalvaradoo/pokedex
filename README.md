@@ -1,6 +1,5 @@
 # Creación de una API que funcione de Pokedex
-
-
+Disponible [aquí](https://mauricioalvaradoo.github.io/pokemon_api/Data/pokemons.json). Su estructura es la siguiente:
 
 ```
 {

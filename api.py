@@ -10,7 +10,7 @@ api = Flask(__name__)
 
 
 # Ruta API
-@app.route('/api', methods=['GET'])
+@api.route('/api', methods=['GET'])
 def get_data():
     return jsonify(data)
 

@@ -44,10 +44,13 @@ for i in range(1, len(list_id)+1):
     pokemons_v1[i] = {
         'Name': list_name[i-1],
         'Generation': list_generation[i-1],
+        'Height': list_height[i-1],
+        'Weigh': list_weight[i-1],
         'Type': list_type[i-1],
         'Image': list_image_url[i-1],
         'Egg Group': list_kind[i-1],
-        'Stats': list_stats[i-1]
+        'Stats': list_stats[i-1],
+        'Evolution': list_evolution[i-1]
     }
 
 
@@ -67,7 +70,7 @@ for key, value in pokemons_v1.items():
 
 # Observar la estructura ======================================================
 # Ver los dos primeros pokemons
-print(json.dumps(pokemons_v2, indent = 3, ensure_ascii=False)[:1203])
+print(json.dumps(pokemons_v2, indent = 3, ensure_ascii=False)[:1450])
 
 
 

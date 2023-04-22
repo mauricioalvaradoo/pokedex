@@ -2,11 +2,9 @@ import pandas as pd
 from selenium import webdriver
 from bs4 import BeautifulSoup
 from selenium.webdriver.common.by import By
-# import pandas
+from collections import OrderedDict
 # from selenium.webdriver.support.ui import Select
 
-# from time import sleep
-# import re
 
 
 
@@ -32,21 +30,14 @@ def get_urls(url):
     list_urls = [] 
     observations = soup.find_all('tr')
 
-    for i in observations:
-        tds = i.find_all('td')
-        
-        for j in tds:
-            try:  
-                url = j.find('a').get('href')
-                list_urls.append(url)
-            except: 
-                pass
-    
-    # Modificaciones finales
-    list_urls = [u for u in list_urls if u.startswith('/wiki')]
-    list_urls = [u for u in list_urls if not (u.endswith('type') or u.endswith('UserLogin'))]
-    list_urls = [u for u in list_urls if not u.endswith('Pok%C3%A9dex')]
-    
+    for i in observations:        
+        try:  
+            url = i.find('a', {'class': 'ent-name'}).get('href')
+            list_urls.append(url)
+        except: 
+            pass
+
+
     return list_urls
 
 
@@ -60,21 +51,27 @@ def get_information(list_urls):
     
     Retorno
     ----------
-    list_name [list]: Nombre
+    list_name [list]:       Nombre
     list_generation [list]: Generación
-    list_type [list]: Tipo
-    list_image_url [list]: Url de imagen
-    list_kind [list]: Egg group
-    list_stats [dict]: Stats  
+    list_height[list]:      Altura
+    list_weight[list]:      Peso
+    list_type [list]:       Tipo
+    list_image_url [list]:  Url de imagen
+    list_kind [list]:       Egg group
+    list_stats [dict]:      Stats
+    list_evolution[list]:   Línea de evolución
     
     """
     
-    list_name = []
+    list_name       = []
     list_generation = []
-    list_type = []
-    list_image_url = [] 
-    list_kind = []
-    list_stats = []
+    list_height     = []
+    list_weight     = []
+    list_type       = []
+    list_image_url  = [] 
+    list_kind       = []
+    list_stats      = []
+    list_evolution  = []
     
     
     for url in list_urls:
@@ -88,94 +85,94 @@ def get_information(list_urls):
              
         # Nombres
         try: 
-            name = driver.find_element(By.XPATH, value='//*[@id="mw-content-text"]/div[1]/aside/section[1]/h2[1]').text
+            name = driver.find_element(By.XPATH, value='/html/body/main/h1').text
         except:
-            try:
-                name = driver.find_element(By.XPATH, value='//*[@id="mw-content-text"]/div[1]/aside/section/div[2]/section[1]/h2[1]').text
-            except:
-                try:
-                    name = driver.find_element(By.XPATH, value='//*[@id="mw-content-text"]/div[1]/aside/section/div/section[1]/h2[1]').text
-                except:
-                    name = driver.find_element(By.XPATH, value='//*[@id="mw-content-text"]/div[1]/aside/section[1]/h2[1]').text
+            name = ''
        
         # Generación
         try:
-            generation = driver.find_element(By.XPATH, value='//*[@id="mw-content-text"]/div[1]/aside/section[2]/section[1]/section[2]/div/a').text
+            generation = driver.find_element(By.XPATH, value='/html/body/main/p/abbr').text
         except:
-            try:
-                generation = driver.find_element(By.XPATH, value='//*[@id="mw-content-text"]/div[1]/aside/section/div[2]/section[2]/section[1]/section[2]/div').text
-            except:
-                try:
-                    generation = driver.find_element(By.XPATH, value='//*[@id="mw-content-text"]/div[1]/aside/section/div/section[2]/section[1]/section[2]/div').text
-                except:
-                    generation = driver.find_element(By.XPATH, value='//*[@id="mw-content-text"]/div[1]/aside/section[2]/section[1]/section[2]/div').text
+            generation = ''
+        
+        # Altura
+        try:
+            height = driver.find_element(By.XPATH, value='/html/body/main/div[2]/div[2]/div/div[1]/div[2]/table/tbody/tr[4]/td').text
+        except:
+            height = '' 
+            
+        # Peso
+        try:
+            weight = driver.find_element(By.XPATH, value='/html/body/main/div[2]/div[2]/div/div[1]/div[2]/table/tbody/tr[5]/td').text
+        except:
+            weight = ''  
         
         # Tipos
         try:
-            all_types = driver.find_element(By.XPATH, value='//*[@id="mw-content-text"]/div[1]/aside/section[2]/div[1]/div')
+            all_types = driver.find_element(By.XPATH, value='/html/body/main/div[2]/div[2]/div/div[1]/div[2]/table/tbody/tr[2]/td')
         except:
-            try:
-                all_types = driver.find_element(By.XPATH, value='//*[@id="mw-content-text"]/div[1]/aside/section/div[2]/section[2]/div[1]/div')
-            except:
-                try:
-                    all_types = driver.find_element(By.XPATH, value='//*[@id="mw-content-text"]/div[1]/aside/section/div/section[2]/div[1]/div')
-                except:
-                    all_types = driver.find_element(By.XPATH, value='//*[@id="mw-content-text"]/div[1]/aside/section[2]/div[1]/div')
+            all_types = ''
+        
         types = []
         all_types = all_types.find_elements(By.CSS_SELECTOR, value='a')
         for i in all_types:
-            types.append( i.get_attribute('title') )
+            types.append( i.text )
+        types = [w.capitalize() for w in types] # Capitalizar el texto
         
         # URL de imágenes
         try:
-            image_url = driver.find_element(By.XPATH, value = '//*[@id="mw-content-text"]/div[1]/aside/figure/a').get_attribute('href')
+            image_url = driver.find_element(By.XPATH, value = '/html/body/main/div[2]/div[2]/div/div[1]/div[1]/p[1]/a').get_attribute('href')
         except:
-            try:
-                image_url = driver.find_element(By.XPATH, value = '//*[@id="mw-content-text"]/div[1]/aside/section/div[2]/figure/a').get_attribute('href')
-            except:
-                try:
-                    image_url = driver.find_element(By.XPATH, value = '//*[@id="mw-content-text"]/div[1]/aside/section/div/figure/a').get_attribute('href')
-                except:
-                    try:
-                        image_url = driver.find_element(By.XPATH, value = '//*[@id="mw-content-text"]/div[1]/aside/figure/a').get_attribute('href')
-                    except:
-                        image_url = ''
+            image_url = ''
+        
         ## Egg group
         try:
-            all_kinds = driver.find_element(By.XPATH, value = '//*[@id="mw-content-text"]/div[1]/aside/section[6]/section[3]/section[2]/div[1]')
+            all_kinds = driver.find_element(By.XPATH, value = '/html/body/main/div[2]/div[2]/div/div[1]/div[3]/div/div[2]/table/tbody/tr[1]/td')
         except:
-            try:
-                all_kinds = driver.find_element(By.XPATH, value = '//*[@id="mw-content-text"]/div[1]/aside/section/div[2]/section[6]/section[3]/section[2]/div[1]')
-            except:
-                try:
-                    all_kinds = driver.find_element(By.XPATH, value = '//*[@id="mw-content-text"]/div[1]/aside/section/div/section[6]/section[3]/section[2]/div[1]')
-                except:
-                    all_kinds = driver.find_element(By.XPATH, value = '//*[@id="mw-content-text"]/div[1]/aside/section[6]/section[3]/section[2]/div[1]')
+            pass
         kinds = []
         all_kinds = all_kinds.find_elements(By.CSS_SELECTOR, value='a')
         for i in all_kinds:
-            kinds.append( i.get_attribute('title').replace(' (egg group)', '' ) )
+            kinds.append( i.text )
         
         # Stats
-        stats = soup.find('table', {'class': 'roundy'})
+        stats = soup.find('div', {'class': 'resp-scroll'})
         stats = pd.read_html(str(stats))[0]
+        
+        stats = stats[[0, 1]]
         stats = stats.set_index(stats.columns[0])
         stats = list(stats.to_dict().values())[0]
-
         
+        # Línea de evolución
+        evol = driver.find_element(By.XPATH, value = '/html/body/main/div[5]')
+        evol = evol.find_elements(By.CSS_SELECTOR, value='div')
+            
+        evols = []
+        for e in evol:
+            e = e.find_element(By.CLASS_NAME, value='ent-name')
+            evols.append( e.text )
+        evols = list(OrderedDict.fromkeys(evols))
+        
+        if evols == []:
+            evols = [name]
+
+
         # Guardado
         list_name.append(name)
         list_generation.append(generation)
+        list_height.append(height)
+        list_weight.append(weight)
         list_type.append(types)
         list_image_url.append(image_url)
         list_kind.append(kinds)
         list_stats.append(stats)
+        list_evolution.append(evols)
         
         driver.close()
 
     return (
-        list_name, list_generation, list_type, list_image_url,
-        list_kind, list_stats
+        list_name, list_generation, list_height, list_weight, list_type,
+        list_image_url, list_kind, list_stats, list_evolution
         )
 
 

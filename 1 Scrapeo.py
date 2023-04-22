@@ -1,32 +1,39 @@
-### Creaci髇 de Poke API
+### Creaci贸n de Poke API
 import utils
 import numpy as np
 import pickle
+from collections import OrderedDict
 
 
-# Obtenci髇: Url de Pokemons ==================================================
-urls = utils.get_urls('https://pokemon.fandom.com/wiki/List_of_Pok%C3%A9mon')
-urls = [f'https://pokemon.fandom.com{i}' for i in urls]
-
-
-# Obtenci髇: Datos de cada Pokemon ============================================
-list_name, list_generation, list_type, list_image_url, \
-    list_kind, list_stats = utils.get_information(urls)
+# Obtenci贸n: Url de Pokemons ==================================================
+urls = utils.get_urls('https://pokemondb.net/pokedex/all')
+urls = [f'https://pokemondb.net{i}' for i in urls]
+urls = list(OrderedDict.fromkeys(urls))
 
 
 
-# Generando c骴igo de Pokemon =================================================
-list_id = np.linspace(1, 1008, 1008).astype('int64').astype('str').tolist()
+# Obtenci贸n: Datos de cada Pokemon ============================================
+list_name, list_generation, list_height, list_weight, list_type, \
+    list_image_url, list_kind, list_stats, list_evolution \
+        = utils.get_information(urls)
+
+
+
+# Generando c贸digo de Pokemon =================================================
+list_id = np.linspace(1, len(list_name), len(list_name))\
+    .astype('int64').astype('str').tolist()
 
 
 
 # Guardado ====================================================================
-with open('Data/list_id.pkl', 'wb') as f:
-    pickle.dump(list_id, f)
 with open('Data/list_name.pkl', 'wb') as f:
     pickle.dump(list_name, f)
 with open('Data/list_generation.pkl', 'wb') as f:
     pickle.dump(list_generation, f)
+with open('Data/list_height.pkl', 'wb') as f:
+    pickle.dump(list_height, f)
+with open('Data/list_weight.pkl', 'wb') as f:
+    pickle.dump(list_weight, f)
 with open('Data/list_type.pkl', 'wb') as f:
     pickle.dump(list_type, f)
 with open('Data/list_image_url.pkl', 'wb') as f:
@@ -35,4 +42,6 @@ with open('Data/list_kind.pkl', 'wb') as f:
     pickle.dump(list_kind, f)
 with open('Data/list_stats.pkl', 'wb') as f:
     pickle.dump(list_stats, f)
+with open('Data/list_evolution.pkl', 'wb') as f:
+    pickle.dump(list_evolution, f)
 

@@ -5,7 +5,6 @@ import json
 
 
 
-
 # Importación =================================================================
 with open('Data/list_id.pkl', 'rb') as f:
     list_id = pickle.load(f)
@@ -13,6 +12,10 @@ with open('Data/list_name.pkl', 'rb') as f:
     list_name = pickle.load(f)
 with open('Data/list_generation.pkl', 'rb') as f:
     list_generation = pickle.load(f)
+with open('Data/list_height.pkl', 'rb') as f:
+    list_height = pickle.load(f)
+with open('Data/list_weight.pkl', 'rb') as f:
+    list_weight = pickle.load(f)
 with open('Data/list_type.pkl', 'rb') as f:
     list_type = pickle.load(f)
 with open('Data/list_image_url.pkl', 'rb') as f:
@@ -21,6 +24,8 @@ with open('Data/list_kind.pkl', 'rb') as f:
     list_kind = pickle.load(f)
 with open('Data/list_stats.pkl', 'rb') as f:
     list_stats = pickle.load(f)
+with open('Data/list_evolution.pkl', 'rb') as f:
+    list_evolution = pickle.load(f)
 
 
 
@@ -28,12 +33,6 @@ with open('Data/list_stats.pkl', 'rb') as f:
 # Reducción
 list_image_url = [i.split('.png')[0] for i in list_image_url]
 list_image_url = [f'{i}.png' for i in list_image_url]
-
-# Reemplazar el único pokemon sin imagen
-for i in range(len(list_image_url)):
-    if list_image_url[i] == '.png':
-        list_image_url[i] = 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/973.png'
-
 
 
 

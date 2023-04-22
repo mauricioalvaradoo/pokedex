@@ -1,6 +1,6 @@
 import pickle
 from flask import Flask, jsonify
-
+# http://localhost:4000/app
 
 with open('Data/pokemons.pkl', 'rb') as f:
     data = pickle.load(f)

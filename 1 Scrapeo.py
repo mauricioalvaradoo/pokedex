@@ -26,6 +26,8 @@ list_id = np.linspace(1, len(list_name), len(list_name))\
 
 
 # Guardado ====================================================================
+with open('Data/list_id.pkl', 'wb') as f:
+    pickle.dump(list_id, f)
 with open('Data/list_name.pkl', 'wb') as f:
     pickle.dump(list_name, f)
 with open('Data/list_generation.pkl', 'wb') as f:

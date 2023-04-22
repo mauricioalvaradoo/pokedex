@@ -29,13 +29,6 @@ with open('Data/list_evolution.pkl', 'rb') as f:
 
 
 
-# Modificaciones a los URL de las imágenes ====================================
-# Reducción
-list_image_url = [i.split('.png')[0] for i in list_image_url]
-list_image_url = [f'{i}.png' for i in list_image_url]
-
-
-
 # Estructura ==================================================================
 pokemons_v1 = {}
 
@@ -45,7 +38,7 @@ for i in range(1, len(list_id)+1):
         'Name': list_name[i-1],
         'Generation': list_generation[i-1],
         'Height': list_height[i-1],
-        'Weigh': list_weight[i-1],
+        'Weight': list_weight[i-1],
         'Type': list_type[i-1],
         'Image': list_image_url[i-1],
         'Egg Group': list_kind[i-1],
@@ -70,7 +63,7 @@ for key, value in pokemons_v1.items():
 
 # Observar la estructura ======================================================
 # Ver los dos primeros pokemons
-print(json.dumps(pokemons_v2, indent = 3, ensure_ascii=False)[:1450])
+# print(json.dumps(pokemons_v2, indent = 3, ensure_ascii=False)[:1450])
 
 
 

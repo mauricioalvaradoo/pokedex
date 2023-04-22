@@ -12,12 +12,12 @@ Es la siguiente:
          "Name": "Bulbasaur",
          "Generation": "Generation 1",
          "Height": "0.7 m (2′04″)",
-         "Weigh": "6.9 kg (15.2 lbs)",
+         "Weight": "6.9 kg (15.2 lbs)",
          "Type": [
             "Grass",
             "Poison"
          ],
-         "Image": "https://img.pokemondb.net/artwork/large/bulbasaur.jpg.png",
+         "Image": "https://img.pokemondb.net/artwork/large/bulbasaur.jpg",
          "Egg Group": [
             "Grass",
             "Monster"
@@ -41,12 +41,12 @@ Es la siguiente:
          "Name": "Ivysaur",
          "Generation": "Generation 1",
          "Height": "1.0 m (3′03″)",
-         "Weigh": "13.0 kg (28.7 lbs)",
+         "Weight": "13.0 kg (28.7 lbs)",
          "Type": [
             "Grass",
             "Poison"
          ],
-         "Image": "https://img.pokemondb.net/artwork/large/ivysaur.jpg.png",
+         "Image": "https://img.pokemondb.net/artwork/large/ivysaur.jpg",
          "Egg Group": [
             "Grass",
             "Monster"

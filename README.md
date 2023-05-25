@@ -1,5 +1,5 @@
 # API-Pokedex
-El despliegue se realizó mediante Github Pages, con la finalidad de evitar usar softwares de pago. El archivo 'json' que contiene los datos de toda la API se encuentra en una página web plana, disponible [aquí](https://mauricioalvaradoo.github.io/pokemon_api/Data/pokemons.json).
+El despliegue se realizó mediante Github Pages, con la finalidad de evitar el uso de softwares de pago. El archivo 'json' que contiene los datos de toda la API se encuentra en una página web plana, disponible [aquí](https://mauricioalvaradoo.github.io/pokemon_api/Data/pokemons.json).
 
 
 ## Estructura

@@ -69,3 +69,5 @@ Es la siguiente:
     }
  }
 ```
+## Acceso
+Mediante el código de Python disponible [aquí](https://github.com/mauricioalvaradoo/pokemon_api/blob/master/get_data_api.py) se puede acceder a la información publicada en Github Pages.
